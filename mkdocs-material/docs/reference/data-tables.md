@@ -1,5 +1,4 @@
 ---
-template: overrides/main.html
 icon: material/table-edit
 ---
 
@@ -11,7 +10,7 @@ like [sortable tables] can be achieved with a third-party library and some
 [additional JavaScript].
 
   [sortable tables]: #sortable-tables
-  [additional JavaScript]: ../customization.md#additional-javascript 
+  [additional JavaScript]: ../customization.md#additional-javascript
 
 ## Configuration
 
@@ -131,7 +130,7 @@ If you want to make data tables sortable, you can add [tablesort], which is
 natively integrated with Material for MkDocs and will also work with [instant
 loading] via [additional JavaScript]:
 
-=== ":octicons-file-code-16: docs/javascripts/tablesort.js"
+=== ":octicons-file-code-16: `docs/javascripts/tablesort.js`"
 
     ``` js
     document$.subscribe(function() {
@@ -142,7 +141,7 @@ loading] via [additional JavaScript]:
     })
     ```
 
-=== ":octicons-file-code-16: mkdocs.yml"
+=== ":octicons-file-code-16: `mkdocs.yml`"
 
     ``` yaml
     extra_javascript:
@@ -183,3 +182,10 @@ numbers, filesizes, dates and month names. See the [tablesort documentation]
 
   [tablesort]: http://tristen.ca/tablesort/demo/
   [instant loading]: ../setup/setting-up-navigation.md#instant-loading
+
+### Import table from file
+
+The plugin [mkdocs-table-reader-plugin][table-reader-docs] allows you to
+import data from a CSV or Excel file.
+
+  [table-reader-docs]: https://timvink.github.io/mkdocs-table-reader-plugin/

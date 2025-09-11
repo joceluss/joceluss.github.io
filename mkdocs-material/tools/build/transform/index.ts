@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -24,7 +24,7 @@ import { createHash } from "crypto"
 import { build as esbuild } from "esbuild"
 import * as fs from "fs/promises"
 import * as path from "path"
-import postcss, { Plugin, Rule } from "postcss"
+import postcss from "postcss"
 import {
   EMPTY,
   Observable,
@@ -60,7 +60,8 @@ interface TransformOptions {
 /**
  * Base directory for source map resolution
  */
-const root = new RegExp(`file://${path.resolve(".")}/`, "g")
+const currentPath = path.resolve(".").replace(new RegExp(`\\${path.win32.sep}`, "g"), path.posix.sep)
+const root = path.sep === path.posix.sep ? new RegExp(`file://${currentPath}/`, "g") : new RegExp(`file:///${currentPath}/`, "g")
 
 /* ----------------------------------------------------------------------------
  * Helper functions
@@ -83,36 +84,6 @@ function digest(file: string, data: string): string {
   }
 }
 
-/**
- * Custom PostCSS plugin to polyfill newer CSS features
- *
- * @returns PostCSS plugin
- */
-function plugin(): Plugin {
-  const rules = new Set<Rule>()
-  return {
-    postcssPlugin: 'mkdocs-material',
-    Root (root) {
-
-      /* Fallback for :is() */
-      root.walkRules(/:is\(/, rule => {
-        if (!rules.has(rule)) {
-          rules.add(rule)
-
-          /* Add prefixed versions */
-          for (const pseudo of [":-webkit-any(", ":-moz-any("])
-            rule.cloneBefore({
-              selectors: rule.selectors.map(selector => (
-                selector.replace(/:is\(/g, pseudo)
-              ))
-            })
-        }
-      })
-    }
-  }
-}
-plugin.postcss = true
-
 /* ----------------------------------------------------------------------------
  * Functions
  * ------------------------------------------------------------------------- */
@@ -129,11 +100,12 @@ export function transformStyle(
 ): Observable<string> {
   return defer(() => of(compile(options.from, {
     loadPaths: [
-      "src/assets/stylesheets",
+      "src/templates/assets/stylesheets",
       "node_modules/modularscale-sass/stylesheets",
       "node_modules/material-design-color",
       "node_modules/material-shadows"
     ],
+    silenceDeprecations: ["global-builtin", "import"],
     sourceMap: true
   })))
     .pipe(
@@ -141,10 +113,10 @@ export function transformStyle(
         require("autoprefixer"),
         require("postcss-logical"),
         require("postcss-dir-pseudo-class"),
-        plugin,
+        require("postcss-pseudo-is"),
         require("postcss-inline-svg")({
           paths: [
-            `${base}/.icons`
+            `${base}/templates/.icons`
           ],
           encode: false
         }),
@@ -201,7 +173,6 @@ export function transformScript(
     write: false,
     bundle: true,
     sourcemap: true,
-    sourceRoot: "../../../..",
     legalComments: "inline",
     minify: process.argv.includes("--optimize"),
     plugins: [

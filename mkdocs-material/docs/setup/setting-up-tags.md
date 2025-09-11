@@ -1,7 +1,3 @@
----
-template: overrides/main.html
----
-
 # Setting up tags
 
 Material for MkDocs adds first-class support for categorizing pages with tags,
@@ -15,9 +11,8 @@ can help to discover relevant information faster.
 
 ### Built-in tags plugin
 
-[:octicons-tag-24: 8.2.0][tags support] ·
-:octicons-cpu-24: Plugin ·
-:octicons-beaker-24: Experimental
+<!-- md:version 8.2.0 -->
+<!-- md:plugin -->
 
 The built-in tags plugin adds the ability to categorize any page with tags
 as part of the front matter of the page. In order to add support for tags, add
@@ -28,72 +23,34 @@ plugins:
   - tags
 ```
 
-The following configuration options are available:
+For a list of all settings, please consult the [plugin documentation].
 
-`tags_file`{ #tags-file }
+  [plugin documentation]: ../plugins/tags.md
 
-:   :octicons-milestone-24: Default: _none_ – This option specifies which file
-    should be used to render the tags index. See the section on [adding a tags 
-    index][tags index] for more information. If this option is specified, tags
-    will become clickable, pointing to the corresponding section in the tags
-    index:
+#### Advanced settings
 
-    ``` yaml
-    plugins:
-      - tags:
-          tags_file: tags.md
-    ```
+<!-- md:sponsors -->
+<!-- md:version insiders-4.48.0 -->
+<!-- md:flag experimental -->
 
-    The page holding the tags index can be linked anywhere in the `nav` section
-    of `mkdocs.yml`. Note, however, that this options is not required – only use
-    it if you want a tags index page.
+The following advanced settings are currently reserved to our [sponsors]
+[Insiders]. They are entirely optional, and only add additional capabilities to
+the tags plugin:
 
-`tags_extra_files`{ #tags-extra-files } :material-alert-decagram:{ .mdx-pulse title="Added on July 7, 2022" }
+<!-- - [`listings_layout`][config.listings_layout] -->
+- [`listings_toc`][config.listings_toc]
 
-:   [:octicons-tag-24: insiders-4.20.0][Insiders] · :octicons-milestone-24: 
-    Default: _none_ – This option allows to define additional pages to render
-    subsets of the [tags index], in order to provide scoped tags indexes for
-    specific sections:
+We'll add more settings here in the near future.
 
-    ``` yaml
-    plugins:
-      - tags:
-          tags_extra_files:
-            compatibility.md:
-              - compat # (1)!
-            web.md:
-              - html
-              - js
-              - css
-    ```
+  [Insiders]: ../insiders/index.md
+  [config.listings_layout]: ../plugins/tags.md#config.listings_layout
+  [config.listings_toc]: ../plugins/tags.md#config.listings_toc
 
-    1.  Each page can be assigned a list of [tag identifiers], which must be
-        defined as part of `extra.tags` in `mkdocs.yml`:
+### Tag icons and identifiers
 
-        ``` yaml
-        extra:
-          tags:
-            Compatibility: compat
-            HTML5: html
-            JavaScript: js
-            CSS: css
-        ```
-
-        In this example, all pages with the tag `Compatibility` will be included 
-        in the additional tags index on `compatibility.md`, all pages defining
-        at least one of the tags `HTML5`, `JavaScript` or `CSS` will be included
-        in the additional tags index on `web.md`.
-
-    See #3864 for additional use cases.
-
-  [tags support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.2.0
-  [tag identifiers]: #tag-icons
-
-### Tag icons
-
-[:octicons-heart-fill-24:{ .mdx-heart } Sponsors only][Insiders]{ .mdx-insiders } ·
-[:octicons-tag-24: insiders-4.13.0][Insiders] ·
-:octicons-beaker-24: Experimental
+<!-- md:version 8.5.0 -->
+<!-- md:flag experimental -->
+<!-- md:example tags-with-icons -->
 
 Each tag can be associated with an icon, which is then rendered inside the tag.
 Before assigning icons to tags, associate each tag with a unique identifier,
@@ -118,9 +75,9 @@ extra:
     Identifiers can be reused between tags. Tags which are not explicitly
     associated will use the default tag icon which is :material-pound:
 
-Next, each identifier can be associated with an icon, or even a [custom icon],
-by adding the following lines to `mkdocs.yml` under the `theme.icon`
-configuration setting:
+Next, each identifier can be associated with an icon, even a [custom icon], by
+adding the following lines to `mkdocs.yml` under the `theme.icon` configuration
+setting:
 
 === "Tag icon"
 
@@ -167,7 +124,6 @@ configuration setting:
         CSS: css
     ```
 
-  [Insiders]: ../insiders/index.md
   [custom icon]: changing-the-logo-and-icons.md#additional-icons
   [icon search]: ../reference/icons-emojis.md#search
 
@@ -175,8 +131,11 @@ configuration setting:
 
 ### Adding tags
 
+<!-- md:version 8.2.0 -->
+<!-- md:example tags -->
+
 When the [built-in tags plugin] is enabled, tags can be added for a document
-with the front matter `tags` property. Add the following lines at the top of a 
+with the front matter `tags` property. Add the following lines at the top of a
 Markdown file:
 
 ``` sh
@@ -197,7 +156,7 @@ search preview, which now allows to __find pages by tags__.
 
     With the help of the [built-in meta plugin], you can ensure that tags are
     set for an entire section and all nested pages, by creating a `.meta.yml`
-    in the corresponding folder with the following content:
+    file in the corresponding folder with the following content:
 
     ``` yaml
     tags:
@@ -211,31 +170,160 @@ search preview, which now allows to __find pages by tags__.
     and then add specific tags for each page. The tags in `.meta.yml` are
     appended.
 
-  [built-in tags plugin]: #built-in-tags-plugin
-  [built-in meta plugin]: ../reference/index.md#built-in-meta-plugin
+  [built-in tags plugin]: ../plugins/tags.md
+  [built-in meta plugin]: ../plugins/meta.md
 
 ### Adding a tags index
 
-The [built-in tags plugin] allows to define a file to render a [tags index]
-[tags.tags_file], which can be any page that is part of the `nav` section. To
-add a tags index, create a page, e.g. `tags.md`:
+<!-- md:version 8.2.0 -->
+<!-- md:example tags -->
+
+The [built-in tags plugin] allows to define a file to render a tags index,
+which can be any page that is part of the `nav` section. To add a tags index,
+create a page, e.g. `tags.md`:
 
 ``` markdown
 # Tags
 
 Following is a list of relevant tags:
 
-[TAGS]
+<!-- material/tags -->
 ```
 
-The `[TAGS]` marker specifies the position of the tags index, i.e. it is
+The tags marker specifies the position of the tags index, i.e. it is
 replaced with the actual tags index when the page is rendered. You can include
 arbitrary content before and after the marker:
 
-[![Tags index][9]][9]
+[![Tags index][tags index enabled]][tags index enabled]
 
-  [tags.tags_file]: #tags-file
-  [9]: ../assets/screenshots/tags-index.png
+  [tags index enabled]: ../assets/screenshots/tags-index.png
+
+### Advanced features
+
+[Insiders] ships a __ground up rewrite of the tags plugin__ which is infinitely
+more powerful than the current version in the community edition. It allows
+for an arbitrary number of tags indexes (listings), [scoped listings],
+[shadow tags], [nested tags], and much more.
+
+  [scoped listings]: #scoped-listings
+  [shadow tags]: #shadow-tags
+  [nested tags]: #nested-tags
+
+#### Configurable listings
+
+<!-- md:version 9.6.0 -->
+<!-- md:flag experimental -->
+
+Listings can be configured in `mkdocs.yml` or directly at the location of the
+marker that you position in a Markdown document. Some examples:
+
+- __Use [scoped listings]__: limit the tags index to pages that are on the same
+  level of the subsection of the documentation the page is in:
+
+    ``` html
+    <!-- material/tags { scope: true } -->
+    ```
+
+- __List only specific tags__: limit the tags index to a single or multiple
+  selected tags, e.g., `Foo` and `Bar`, excluding all other tags:
+
+    ``` html
+    <!-- material/tags { include: [Foo, Bar] } -->
+    ```
+
+- __Exclude pages with specific tags__: don't include pages that are tagged
+  with specific tags, e.g. `Internal`. This can be any tag, including a shadow
+  tag:
+
+    ``` html
+    <!-- material/tags { exclude: [Internal] } -->
+    ```
+
+- __Enable or disable tags inside the table of contents__: specify whether the
+  table of contents lists all tags under the nearest headline:
+
+    ``` html
+    <!-- material/tags { toc: false } -->
+    ```
+
+See the [listing configuration] for all options.
+
+  [listing configuration]: ../plugins/tags.md#listing-configuration
+
+#### Scoped listings
+
+<!-- md:sponsors -->
+<!-- md:version insiders-4.48.0 -->
+<!-- md:flag experimental -->
+
+If your documentation is large, you might want to consider using scoped listings
+which will only include pages that are on the same level or below the page
+containing the listing. Just use:
+
+``` html
+<!-- material/tags { scope: true } -->
+```
+
+If you plan to use multiple scoped indexes, it's a good idea to define a
+listing configuration in `mkdocs.yml`, which you can then reference by its id:
+
+``` yaml
+plugins:
+  - tags:
+      listings_map:
+        scoped:
+          scope: true
+```
+
+You can now use:
+
+``` html
+<!-- material/tags scoped -->
+```
+
+#### Shadow tags
+
+<!-- md:sponsors -->
+<!-- md:version insiders-4.48.0 -->
+<!-- md:flag experimental -->
+
+Shadow tags are tags that are solely meant to organization, which can be
+included or excluded for rendering with a simple flag. They can be enumerated
+in the [`shadow_tags`][config.shadow_tags] setting:
+
+``` yaml
+plugins:
+  - tags:
+      shadow_tags:
+        - Draft
+        - Internal
+```
+
+If a document is tagged with `Draft`, the tag will only be rendered if
+[`shadow`][config.shadow] setting is enabled, and excluded when it is disabled.
+This is an excellent opportunity for using tags for structuring.
+
+  [config.shadow]: ../plugins/tags.md#config.shadow
+  [config.shadow_tags]: ../plugins/tags.md#config.shadow_tags
+
+#### Nested tags
+
+<!-- md:sponsors -->
+<!-- md:version insiders-4.48.0 -->
+<!-- md:flag experimental -->
+
+[Insiders] ships support for nested tags. The
+[`tags_hierarchy_separator`][config.tags_hierarchy_separator] allows to create
+hierarchies of tags, e.g., `Foo/Bar`. Nested tags will be rendered as children
+of the parent tag:
+
+``` yaml
+plugins:
+  - tags:
+      tags_hierarchy: true
+```
+
+  [config.tags_hierarchy_separator]: ../plugins/tags.md#config.tags_hierarchy_separator
 
 ### Hiding tags on a page
 
@@ -243,12 +331,12 @@ While the tags are rendered above the main headline, sometimes, it might be
 desirable to hide them for a specific page, which can be achieved with the
 front matter `hide` property:
 
-``` sh
+``` yaml
 ---
 hide:
   - tags
 ---
 
-# Document title
+# Page title
 ...
 ```

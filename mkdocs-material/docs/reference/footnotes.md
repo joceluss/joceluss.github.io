@@ -1,5 +1,4 @@
 ---
-template: overrides/main.html
 icon: material/format-align-bottom
 ---
 
@@ -26,6 +25,28 @@ See additional configuration options:
 - [Footnotes]
 
   [Footnotes]: ../setup/extensions/python-markdown.md#footnotes
+
+### Footnote tooltips
+
+<!-- md:sponsors -->
+<!-- md:version insiders-4.51.0 -->
+<!-- md:flag experimental -->
+
+[Insiders] allows to render footnotes as inline tooltips, so the user can read
+the footnote without leaving the context of the document. Footnote tooltips can
+be enabled in `mkdocs.yml` with:
+
+``` yaml
+theme:
+  features:
+    - content.footnote.tooltips
+```
+
+__Footnote tooltips are enabled on our documentation__, so to try it out, you
+can just hover or focus any footnote on this page or any other page of our
+documentation.
+
+  [Insiders]: ../insiders/index.md
 
 ## Usage
 

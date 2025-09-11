@@ -4,24 +4,33 @@
   "markdownDescription": "https://www.mkdocs.org/dev-guide/plugins/",
   "type": "array",
   "items": {
-    "oneOf": [
+    "anyOf": [
       {
-        "$ref": "#/definitions/built-in"
+        "$ref": "#/$defs/built-in"
       },
       {
-        "$ref": "#/definitions/external"
+        "$ref": "#/$defs/external"
       },
       {
-        "$ref": "#/definitions/external-community"
+        "$ref": "#/$defs/external-community"
       }
     ]
   },
   "uniqueItems": true,
   "minItems": 1,
-  "definitions": {
+  "$defs": {
     "built-in": {
       "description": "Built-in plugins",
-      "oneOf": [
+      "anyOf": [
+        {
+          "$ref": "plugins/blog.json"
+        },
+        {
+          "$ref": "plugins/group.json"
+        },
+        {
+          "$ref": "plugins/info.json"
+        },
         {
           "$ref": "plugins/meta.json"
         },
@@ -29,7 +38,13 @@
           "$ref": "plugins/offline.json"
         },
         {
+          "$ref": "plugins/optimize.json"
+        },
+        {
           "$ref": "plugins/privacy.json"
+        },
+        {
+          "$ref": "plugins/projects.json"
         },
         {
           "$ref": "plugins/search.json"
@@ -39,12 +54,21 @@
         },
         {
           "$ref": "plugins/tags.json"
+        },
+        {
+          "$ref": "plugins/typeset.json"
         }
       ]
     },
     "external": {
       "description": "External plugins, schema provided by us",
-      "oneOf": [
+      "anyOf": [
+        {
+          "$ref": "plugins/external/awesome-nav.json"
+        },
+        {
+          "$ref": "plugins/external/gen-files.json"
+        },
         {
           "$ref": "plugins/external/git-authors.json"
         },
@@ -55,16 +79,25 @@
           "$ref": "plugins/external/git-revision-date.json"
         },
         {
+          "$ref": "plugins/external/literate-nav.json"
+        },
+        {
+          "$ref": "plugins/external/macros.json"
+        },
+        {
           "$ref": "plugins/external/minify.json"
         },
         {
           "$ref": "plugins/external/redirects.json"
+        },
+        {
+          "$ref": "plugins/external/section-index.json"
         }
       ]
     },
     "external-community": {
-      "description": "External plugins, schema provided by the community",
-      "oneOf": [
+      "description": "External plugins, schema provided by our community",
+      "anyOf": [
         {
           "$ref": "https://raw.githubusercontent.com/mondeja/mkdocs-include-markdown-plugin/master/schema.json"
         },
@@ -79,6 +112,27 @@
         },
         {
           "$ref": "https://raw.githubusercontent.com/blueswen/mkdocs-glightbox/main/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/prcr/mkdocs-meta-descriptions-plugin/main/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/mkdocstrings/mkdocstrings/main/docs/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/pawamoy/mkdocs-coverage/main/docs/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/pawamoy/mkdocs-spellcheck/main/docs/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/pawamoy/markdown-exec/main/docs/schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/timvink/mkdocs-table-reader-plugin/master/docs/schema.json"
+        },
+        {
+          "$ref": "https://gitlab.com/frederic-zinelli/mkdocs-addresses/-/raw/main/mkdocs-addresses-schema.json"
         }
       ]
     }

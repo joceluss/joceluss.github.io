@@ -28,6 +28,15 @@
       ]
     },
     {
+      "title": "Markdown extension: a classier syntax for admonitions",
+      "markdownDescription": "https://github.com/oprypin/markdown-callouts",
+      "enum": [
+        "markdown.extensions.callouts",
+        "callouts",
+        "github-callouts"
+      ]
+    },
+    {
       "title": "Definition Lists – Python Markdown",
       "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#definition-lists",
       "enum": [
@@ -52,6 +61,14 @@
       ]
     },
     {
+      "title": "Sane Lists – Python Markdown",
+      "markdownDescription": "https://python-markdown.github.io/extensions/sane_lists/",
+      "enum": [
+        "markdown.extensions.sane_lists",
+        "sane_lists"
+      ]
+    },
+    {
       "title": "Tables – Python Markdown",
       "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#tables",
       "enum": [
@@ -65,10 +82,10 @@
           "type": "object",
           "properties": {
             "toc": {
-              "$ref": "#/definitions/toc"
+              "$ref": "#/$defs/toc"
             },
             "markdown.extensions.toc": {
-              "$ref": "#/definitions/toc"
+              "$ref": "#/$defs/toc"
             }
           },
           "additionalProperties": false
@@ -84,24 +101,24 @@
       ]
     }
   ],
-  "definitions": {
+  "$defs": {
     "toc": {
       "title": "Table Of Contents – Python Markdown",
       "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#table-of-contents",
       "type": "object",
       "properties": {
         "title": {
-          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-title",
+          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.title",
           "type": "string"
         },
         "permalink": {
           "oneOf": [
             {
-              "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-permalink",
+              "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.permalink",
               "type": "boolean"
             },
             {
-              "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-permalink",
+              "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.permalink",
               "type": "string"
             }
           ],
@@ -113,15 +130,15 @@
           "default": false
         },
         "permalink_title": {
-          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-permalink-title",
+          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.permalink_title",
           "type": "string"
         },
         "slugify": {
-          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-slugify",
-          "type": "string"
+          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.slugify",
+          "default": "!!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}"
         },
         "toc_depth": {
-          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#toc-depth",
+          "markdownDescription": "https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#+toc.toc_depth",
           "type": "number",
           "enum": [
             0,

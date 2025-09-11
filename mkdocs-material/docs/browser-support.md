@@ -1,11 +1,7 @@
----
-template: overrides/main.html
----
-
 # Browser support
 
 Material for MkDocs goes at great lengths to support the largest possible range
-of browsers while retaining the simplemost possibilities for customization via
+of browsers while retaining the simplest possibilities for customization via
 modern CSS features like [custom properties] and [mask images].
 
   [custom properties]: https://caniuse.com/css-variables
@@ -15,8 +11,8 @@ modern CSS features like [custom properties] and [mask images].
 
 The following table lists all browsers for which Material for MkDocs offers full
 support, so it can be assumed that all features work without degradation. If you
-find a feature not to be working in a browser in the supported version range,
-please [open an issue]:
+find that something doesn't look right in a browser which is in the supported
+version range, please [open an issue]:
 
 <figure markdown>
 
@@ -51,6 +47,8 @@ check the distribution of browser types and versions among your users.
   [open an issue]: https://github.com/squidfunk/mkdocs-material/issues/new/choose
   [caniuse.com]: https://caniuse.com/
   [:is pseudo selector]: https://caniuse.com/css-matches-pseudo
+  [browser support]: #supported-browsers
+  [built-in privacy plugin]: plugins/privacy.md
 
 ## Other browsers
 
@@ -66,6 +64,4 @@ the following older browser versions might work with some additional effort:
 - :fontawesome-brands-internet-explorer: __Internet Explorer__ - no support,
   mainly due to missing support for [custom properties]. The last version of
   Material for MkDocs to support Internet Explorer is
-  [:octicons-tag-24: 4.6.3][IE support].
-
-  [IE support]: https://github.com/squidfunk/mkdocs-material/releases/tag/4.6.3
+  <!-- md:version 4.6.3 -->.

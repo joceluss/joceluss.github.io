@@ -1,28 +1,25 @@
----
-template: overrides/main.html
----
-
 # Ensuring data privacy
 
-Material for MkDocs makes compliance with data privacy regulations very easy, 
+Material for MkDocs makes compliance with data privacy regulations very easy,
 as it offers a native [cookie consent] solution to seek explicit consent from
-users before setting up [tracking]. Additionally, external assets can be
+users before setting up [analytics]. Additionally, external assets can be
 automatically downloaded for [self-hosting].
 
-  [cookie consent]: #native-cookie-consent
-  [tracking]: setting-up-site-analytics.md
+  [cookie consent]: #cookie-consent
+  [analytics]: setting-up-site-analytics.md
   [self-hosting]: #built-in-privacy-plugin
 
 ## Configuration
 
-### Cookie consent { #native-cookie-consent }
+### Cookie consent
 
-[:octicons-tag-24: 8.4.0][cookie consent support] ·
-:octicons-milestone-24: Default: _none_ ·
-:octicons-beaker-24: Experimental
+<!-- md:version 8.4.0 -->
+<!-- md:default none -->
+<!-- md:flag experimental -->
+<!-- md:example cookie-consent -->
 
 Material for MkDocs ships a native and extensible cookie consent form which
-asks the user for consent prior to sending any data via analytics. Add the
+asks the user for consent prior to sending requests to third parties. Add the
 following to `mkdocs.yml`:
 
 ``` yaml
@@ -41,25 +38,30 @@ extra:
 
 The following properties are available:
 
-`title`{ #consent-title }
+<!-- md:option consent.title -->
 
-:   :octicons-milestone-24: Default: _none_ · :octicons-alert-24: Required –
-    This property sets the title of the cookie consent, which is rendered at the 
+:   <!-- md:default none --> <!-- md:flag required -->
+    This property sets the title of the cookie consent, which is rendered at the
     top of the form and must be set to a non-empty string.
 
-`description`{ #consent-description }
+<!-- md:option consent.description -->
 
-:   :octicons-milestone-24: Default: _none_ · :octicons-alert-24: Required –
+:   <!-- md:default none --> <!-- md:flag required -->
     This property sets the description of the cookie consent, is rendered below
     the title, and may include raw HTML (e.g. a links to the terms of service).
 
-`cookies`{ #consent-cookies }
+<!-- md:option consent.cookies -->
 
-:   :octicons-milestone-24: Default: _none_ – This property allows to add custom 
-    cookies or change the initial `checked` state and name of the `analytics`
-    cookie. Each cookie must receive a unique identifier which is used as a key
-    in the `cookies` map, and can be either set to a string, or to a map
-    defining `name` and `checked` state:
+:   <!-- md:default none --> This property allows to add custom
+    cookies or change the initial `checked` state and name of built-in cookies.
+    Currently, the following cookies are built-in:
+
+    - __Google Analytics__ – `analytics` (enabled by default)
+    - __GitHub__ – `github` (enabled by default)
+
+    Each cookie must receive a unique identifier which is used as a key in the
+    `cookies` map, and can be either set to a string, or to a map defining
+    `name` and `checked` state:
 
     ===  "Custom cookie name"
 
@@ -95,14 +97,14 @@ The following properties are available:
             the `analytics` cookie must be added back explicitly, or analytics
             won't be triggered.
 
-
-    If Google Analytics was configured via `mkdocs.yml`, the cookie consent will automatically include a setting for the user to disable it. [Custom cookies]
+    If Google Analytics was configured via `mkdocs.yml`, the cookie consent will
+    automatically include a setting for the user to disable it. [Custom cookies]
     can be used from JavaScript.
 
-`actions`{ #consent-actions }
+<!-- md:option consent.actions -->
 
-:   :octicons-milestone-24: Default: `[accept, manage]` – This property defines
-    which buttons are shown and in which order, e.g. to allow the user to accept 
+:   <!-- md:default `[accept, manage]` --> This property defines
+    which buttons are shown and in which order, e.g. to allow the user to accept
     cookies and manage settings:
 
     ``` yaml
@@ -110,8 +112,11 @@ The following properties are available:
       consent:
         actions:
           - accept
-          - manage
+          - manage # (1)!
     ```
+
+    1.  If the `manage` settings button is omitted from the `actions` property,
+        the settings are always shown.
 
     The cookie consent form includes three types of buttons:
 
@@ -121,21 +126,20 @@ The following properties are available:
 
 When a user first visits your site, a cookie consent form is rendered:
 
-[![cookie consent enabled]][cookie consent enabled]
+[![Cookie consent enabled]][Cookie consent enabled]
 
   [Custom cookies]: #custom-cookies
-  [cookie consent support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.4.0
-  [cookie consent enabled]: ../assets/screenshots/consent.png
+  [Cookie consent enabled]: ../assets/screenshots/consent.png
 
 #### Change cookie settings
 
 In order to comply with GDPR, users must be able to change their cookie settings
-at any time. This can be done by adding a simple link to your [copyright notice] 
+at any time. This can be done by adding a simple link to your [copyright notice]
 in `mkdocs.yml`:
 
 ``` yaml
 copyright: >
-  Copyright &copy; 2016 - 2022 Martin Donath –
+  Copyright &copy; 2016 - 2024 Martin Donath –
   <a href="#__consent">Change cookie settings</a>
 ```
 
@@ -143,313 +147,187 @@ copyright: >
 
 ### Built-in privacy plugin
 
-[:octicons-heart-fill-24:{ .mdx-heart } Sponsors only][Insiders]{ .mdx-insiders } ·
-[:octicons-tag-24: insiders-4.9.0][Insiders] ·
-:octicons-cpu-24: Plugin ·
-:octicons-beaker-24: Experimental
+<!-- md:version 9.5.0 -->
+<!-- md:plugin [privacy][built-in privacy plugin] -->
+<!-- md:flag experimental -->
 
-The built-in privacy plugin automatically identifies [external assets] as part
+The built-in privacy plugin automatically identifies external assets as part
 of the build process and downloads all assets for very simple self-hosting. Add
 the following lines to `mkdocs.yml`:
 
 ``` yaml
 plugins:
-  - privacy # (1)!
+  - privacy
 ```
 
-1.  Note that the privacy plugin should be located at the end of the list of
-    `plugins`, as it will scan the resulting HTML for resources to download and
-    replace. If a plugin after the privacy plugin adds further
-    [external assets], these assets will not be downloaded.
+For a list of all settings, please consult the [plugin documentation].
 
-> If you need to be able to build your documentation with and without
-> [Insiders], please refer to the [built-in plugins] section to learn how
-> shared configurations help to achieve this.
+  [plugin documentation]: ../plugins/privacy.md
 
-The following configuration options are available:
+!!! tip "Hosting images externally and optimizing them automatically"
 
-`enabled`{ #enabled }
+    This option makes the [built-in privacy plugin] an excellent choice for
+    when you want to host assets like images outside of your git repository
+    in another location to keep them fresh and your repository lean.
 
-:   :octicons-milestone-24: Default: `true` – This option specifies whether
-    the plugin is enabled when building your project. If you want to switch
-    the plugin off, e.g. for local builds, use an [environment variable]:
+    Additionally, as of <!-- md:version insiders-4.30.0 -->, the
+    built-in privacy plugin was entirely rewritten and now works perfectly
+    with the [built-in optimize plugin], which means that external assets
+    can be passed through the same optimization pipeline as the rest of your
+    documentation. This means you can store and edit unoptimized files
+    outside of your repository, and let both plugins built a highly
+    optimized site for you.
 
-    ``` yaml
-    plugins:
-      - privacy:
-          enabled: !ENV [PRIVACY, false]
-    ```
+    If you want to implement separate pipelines, i.e., optimize some images
+    differently from others or exclude some images from downloading, you can
+    use multiple instances of the [built-in privacy plugin].
 
-`externals`{ #externals }
-
-:   :octicons-milestone-24: Default: `bundle` – This option specifies what the
-    plugin should do when encountering external assets. There are two options:
-    while `report` will issue warning messages during the build, `bundle` will
-    automatically download all external files and adjust all references:
-
-    ``` yaml
-    plugins:
-      - privacy:
-          externals: bundle
-    ```
-
-    If you've removed all external assets from your project via [customization],
-    it's still a good idea to enable the plugin and set the mode to `report`,
-    as the plugin will make sure that there are no hidden external links in any
-    Markdown files that were unintentionally added.
-
-    Using `report` in [strict mode] will make the build fail when external
-    assets are detected.
-
-    [customization]: ../customization.md
-    [strict mode]: https://www.mkdocs.org/user-guide/configuration/#strict
-
-`externals_dir`{ #externals-dir }
-
-:   :octicons-milestone-24: Default: `assets/externals` – This option
-    specifies where the downloaded [external assets] will be stored. It's
-    normally not necessary to change this option:
-
-    ``` yaml
-    plugins:
-      - privacy:
-          externals_dir: assets/externals
-    ```
-
-`externals_exclude`{ #externals-exclude }
-
-:   :octicons-milestone-24: Default: _none_ – This option allows to exclude
-    certain external assets from processing by the privacy plugin, so they will
-    not be downloaded and bundled during the build:
-
-    ``` yaml
-    plugins:
-      - privacy:
-          externals_exclude: # (1)!
-            - cdn.jsdelivr.net/npm/mathjax@3/* 
-            - giscus.app/*
-    ```
-
-    1.  [MathJax] loads web fonts for typesetting of mathematical content
-        through relative URLs, and thus cannot be automatically bundled by the
-        privacy plugin. [MathJax can be self-hosted].
-
-        Giscus, which we recommend to use as a [comment system], uses a technique
-        called code-splitting to load only the code that is necessary, which
-        is implemented via relative URLs. [Giscus can be self-hosted] as well.
-
-    Excluding specific external assets can be necessary if they contain
-    dynamically created or relative URLs, which can't be resolved by the privacy
-    plugin due to [technical limitations].
-
-  [Insiders]: ../insiders/index.md
-  [built-in plugins]: ../insiders/getting-started.md#built-in-plugins
-  [MathJax]: ../reference/mathjax.md
-  [MathJax can be self-hosted]: https://docs.mathjax.org/en/latest/web/hosting.html
-  [Giscus can be self-hosted]: https://github.com/giscus/giscus/blob/main/SELF-HOSTING.md
-  [comment system]: adding-a-comment-system.md
-  [external assets]: #how-it-works
-  [environment variable]: https://www.mkdocs.org/user-guide/configuration/#environment-variables
-
-??? question "Why can't Material for MkDocs bundle all assets by design?"
+!!! question "Why can't Material for MkDocs bundle all assets by design?"
 
     The primary reason why Material for MkDocs can't just bundle all of its own
     assets is the integration with [Google Fonts], which offers over a thousand
     different fonts that can be used to render your documentation. Most of the
-    fonts include several weights and are split up into different character sets 
+    fonts include several weights and are split up into different character sets
     to keep the download size small, so the browser only downloads what is
     really needed. For Roboto, our default [regular font], this results in [42
     `*.woff2` files in total][example].
-    
+
     If Material for MkDocs would bundle all font files, the download size would
-    be in the hundreds of megabytes, slowing down automated builds. Furthermore, 
-    authors might add external assets like third-party scripts or style sheets 
+    be in the hundreds of megabytes, slowing down automated builds. Furthermore,
+    authors might add external assets like third-party scripts or style sheets
     that would need to be remembered to be defined as further local assets.
-    
+
     This is the very reason the [built-in privacy plugin] exists — it automates
     the process of downloading all external assets manually to ensure compliance
-    with GDPR. Note that there are some [technical limitations].
+    with GDPR with some some [technical limitations].
 
   [Google Fonts]: changing-the-fonts.md
   [regular font]: changing-the-fonts.md#regular-font
   [example]: #example
-  [technical limitations]: #limitations
-
-#### How it works
-
-The [built-in privacy plugin] scans the resulting HTML for links to external
-resources, including external scripts, style sheets, images and web fonts, and
-downloads them to bundle them with your documentation site. Every URL refering
-to an external resource, no matter if part of a template or Markdown file, is
-then replaced with the URL to the local copy. An example:
-
-``` html
-<script src="https://example.com/script.js"></script>
-```
-
-The external script is downloaded, and the link is replaced with:
-
-``` html
-<script src="assets/externals/example.com/script.js"></script>
-```
-
-Style sheets are scanned for external `url(...)` references, e.g. images and
-web fonts, which are then also downloaded and bundled with your documentation
-site. This means that [Google Fonts] can be configured in `mkdocs.yml` as usual,
-as the [built-in privacy plugin] automatically downloads and bundles all
-dependent resources.
-
-As a third measure, [`preconnect`][preconnect] hints used for DNS pre-fetching
-which might also leak the visitors IP address to a third party are automatically
-removed during the build process.
+  [built-in optimize plugin]: ../plugins/optimize.md
+  [technical limitations]: ../plugins/privacy.md#limitations
 
 ??? example "Expand to inspect example"
 
     For the official documentation, the [built-in privacy plugin] downloads the
     following resources:
 
-    ``` { .sh id="example" }
+    ``` { .sh .no-copy #example }
     .
-    └─ assets/externals/
+    └─ assets/external/
        ├─ unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
        ├─ fonts.googleapis.com/css
-       ├─ fonts.gstatic.com/s/
-       │  ├─ roboto/v29/
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc-CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc0CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc1CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc2CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc3CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc5CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TjASc6CsQ.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic-CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic0CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic1CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic2CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic3CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic5CsTKlA.woff2
-       │  │  ├─ KFOjCnqEu92Fr1Mu51TzBic6CsQ.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xEIzIFKw.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xFIzIFKw.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xGIzIFKw.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xHIzIFKw.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xIIzI.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xLIzIFKw.woff2
-       │  │  ├─ KFOkCnqEu92Fr1Mu51xMIzIFKw.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fABc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fBBc4.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fBxc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fCBc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fChc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmSU5fCxc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfBBc4.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfBxc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfCBc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfCRc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfChc4EsA.woff2
-       │  │  ├─ KFOlCnqEu92Fr1MmWUlfCxc4EsA.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu4WxKOzY.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu4mxK.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu5mxKOzY.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu72xKOzY.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu7GxKOzY.woff2
-       │  │  ├─ KFOmCnqEu92Fr1Mu7WxKOzY.woff2
-       │  │  └─ KFOmCnqEu92Fr1Mu7mxKOzY.woff2
-       │  └─ robotomono/v13/
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSV0mf0h.woff2
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSZ0mf0h.woff2
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSd0mf0h.woff2
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSh0mQ.woff2
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSt0mf0h.woff2
-       │     ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSx0mf0h.woff2
-       │     ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtElOUlYIw.woff2
-       │     ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEleUlYIw.woff2
-       │     ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEluUlYIw.woff2
-       │     ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEm-Ul.woff2
-       │     ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEmOUlYIw.woff2
-       │     └─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEn-UlYIw.woff2
-       └─ polyfill.io/v3/polyfill.min.js
+       └─ fonts.gstatic.com/s/
+          ├─ roboto/v29/
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc-CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc0CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc1CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc2CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc3CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc5CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TjASc6CsQ.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic-CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic0CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic1CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic2CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic3CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic5CsTKlA.woff2
+          │  ├─ KFOjCnqEu92Fr1Mu51TzBic6CsQ.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xEIzIFKw.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xFIzIFKw.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xGIzIFKw.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xHIzIFKw.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xIIzI.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xLIzIFKw.woff2
+          │  ├─ KFOkCnqEu92Fr1Mu51xMIzIFKw.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fABc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fBBc4.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fBxc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fCBc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fChc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmSU5fCxc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfBBc4.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfBxc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfCBc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfCRc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfChc4EsA.woff2
+          │  ├─ KFOlCnqEu92Fr1MmWUlfCxc4EsA.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu4WxKOzY.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu4mxK.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu5mxKOzY.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu72xKOzY.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu7GxKOzY.woff2
+          │  ├─ KFOmCnqEu92Fr1Mu7WxKOzY.woff2
+          │  └─ KFOmCnqEu92Fr1Mu7mxKOzY.woff2
+          └─ robotomono/v13/
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSV0mf0h.woff2
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSZ0mf0h.woff2
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSd0mf0h.woff2
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSh0mQ.woff2
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSt0mf0h.woff2
+             ├─ L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSx0mf0h.woff2
+             ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtElOUlYIw.woff2
+             ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEleUlYIw.woff2
+             ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEluUlYIw.woff2
+             ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEm-Ul.woff2
+             ├─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEmOUlYIw.woff2
+             └─ L0xdDF4xlVMF-BfR8bXMIjhOsXG-q2oeuFoqFrlnAIe2Imhk1T8rbociImtEn-UlYIw.woff2
     ```
 
-  [built-in privacy plugin]: #built-in-privacy-plugin
+  [built-in privacy plugin]: ../plugins/privacy.md
   [preconnect]: https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
 
-#### Caching <small>recommended</small> { #caching data-toc-label="Caching" }
+#### Advanced settings
 
-All downloaded files are written to the `.cache` directory, significantly 
-reducing the duration of subsequent builds as only replacements need to be 
-carried out. You might want to:
+<!-- md:sponsors -->
+<!-- md:version insiders-4.50.0 -->
 
-1.  Ignore the `.cache` directory in your project, by adding it to `.gitignore`.
-2.  When building your site for publishing, use a build cache to save the
-    `.cache` directory in between builds. Taking the example from the
-    [publishing guide], add the following lines:
+The following advanced settings are currently reserved to our [sponsors]
+[Insiders]. They are entirely optional, and don't affect the functionality of
+the blog, but can be helpful for customizations:
 
-    ``` yaml hl_lines="15-18"
-    name: ci
-      on:
-        push:
-          branches:
-            - master
-            - main
-      jobs:
-        deploy:
-          runs-on: ubuntu-latest
-          steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-python@v2
-              with:
-                python-version: 3.x
-            - uses: actions/cache@v2
-              with:
-                key: ${{ github.ref }}
-                path: .cache
-            - run: pip install mkdocs-material
-            - run: mkdocs gh-deploy --force
-    ```
+- [`log`][config.log]
+- [`log_level`][config.log_level]
 
-  [publishing guide]: ../publishing-your-site.md#with-github-actions
+We'll add more settings here, as we discover new use cases.
 
-#### Limitations
-
-Note that dynamically created URLs as part of scripts are not detected, and thus
-cannot be automatically downloaded. The [built-in privacy plugin] does not
-execute scripts – it can only detect fully qualified URLs to download and
-replace.
-
-In short, don't do this:
-
-``` js
-const cdn = "https://polyfill.io"
-const url = `${cdn}/v3/polyfill.min.js`
-```
-
-Instead, always use fully qualified URLs:
-
-``` js
-const url ="https://polyfill.io/v3/polyfill.min.js"
-```
+  [Insiders]: ../insiders/index.md
+  [config.log]: ../plugins/privacy.md#config.log
+  [config.log_level]: ../plugins/privacy.md#config.log_level
 
 ## Customization
 
 ### Custom cookies
 
-If you've customized the [cookie consent] and added a `custom` cookie, the user
-will be prompted to accept your custom cookie. Use [additional JavaScript] to
-check whether the user accepted it:
+<!-- md:version 8.4.0 -->
+<!-- md:example custom-cookies -->
 
-=== ":octicons-file-code-16: docs/javascripts/consent.js"
+If you've customized the [cookie consent] and added a `custom` cookie, the user
+will be prompted to accept or reject your custom cookie. Once the user accepts
+or rejects the cookie consent, or [changes the settings], the page reloads[^1].
+Use [additional JavaScript] to query the result:
+
+  [^1]:
+    We reload the page to make interop with custom cookies simpler. If Material
+    for MkDocs would implement a callback-based approach, the author would need
+    to make sure to correctly update all scripts that use cookies. Additionally,
+    the cookie consent is only answered initially, which is why we consider this
+    to be a good trade-off of DX and UX.
+
+=== ":octicons-file-code-16: `docs/javascripts/consent.js`"
 
     ``` js
     var consent = __md_get("__consent")
     if (consent && consent.custom) {
       /* The user accepted the cookie */
+    } else {
+      /* The user rejected the cookie */
     }
     ```
 
-=== ":octicons-file-code-16: mkdocs.yml"
+=== ":octicons-file-code-16: `mkdocs.yml`"
 
     ``` yaml
     extra_javascript:
@@ -457,3 +335,4 @@ check whether the user accepted it:
     ```
 
   [additional JavaScript]: ../customization.md#additional-javascript
+  [changes the settings]: #change-cookie-settings

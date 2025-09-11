@@ -1,5 +1,4 @@
 ---
-template: overrides/main.html
 icon: material/tab
 ---
 
@@ -13,14 +12,14 @@ grouping code blocks and other content.
 ## Configuration
 
 This configuration enables content tabs, and allows to nest arbitrary content
-inside content tabs, including code blocks and ... more content tabs! Add the 
+inside content tabs, including code blocks and ... more content tabs! Add the
 following lines to `mkdocs.yml`:
 
 ``` yaml
 markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
-      alternate_style: true 
+      alternate_style: true
 ```
 
 See additional configuration options:
@@ -33,13 +32,12 @@ See additional configuration options:
 
 ### Anchor links
 
-[:octicons-heart-fill-24:{ .mdx-heart } Sponsors only][Insiders]{ .mdx-insiders } ·
-[:octicons-tag-24: insiders-4.17.0][Insiders] ·
-:octicons-beaker-24: Experimental
+<!-- md:version 9.5.0 -->
+<!-- md:flag experimental -->
 
-In order to link to content tabs and share them more easily, [Insiders] adds
-an anchor link to each content tab automatically, which you can copy via right
-click or open in a new tab:
+In order to link to content tabs and share them more easily, an anchor link is
+automatically added to each content tab, which you can copy via right click or
+open in a new tab:
 
 === "Open me in a new tab ..."
 
@@ -51,18 +49,34 @@ You can copy the link of the tab and create a link on the same or any other
 page. For example, you can [jump to the third tab above this paragraph][tab_1]
 or to the [publishing guide for Insiders][tab_2].
 
-  [Insiders]: ../insiders/index.md
-  [tab_1]: #__tabbed_1_3
-  [tab_2]: ../publishing-your-site.md#__tabbed_1_2
+!!! tip "Readable anchor links"
+
+    [Python Markdown Extensions] 9.6 adds support for [slugification] of
+    content tabs, which produces nicer looking and more readable anchor links.
+    Enable the slugify function with the following lines:
+
+    ``` yaml
+    markdown_extensions:
+      - pymdownx.tabbed:
+          slugify: !!python/object/apply:pymdownx.slugs.slugify
+            kwds:
+              case: lower
+    ```
+
+    Fore more information, please [see the extension guide][slugification].
+
+  [tab_1]: #anchor-links--or-even-me
+  [tab_2]: ../publishing-your-site.md#with-github-actions-insiders
+  [Python Markdown Extensions]: https://facelessuser.github.io/pymdown-extensions/
+  [slugification]: ../setup/extensions/python-markdown-extensions.md#+pymdownx.tabbed.slugify
 
 ### Linked content tabs
 
-[:octicons-tag-24: 8.3.0][link support] ·
-:octicons-unlock-24: Feature flag ·
-:octicons-beaker-24: Experimental
+<!-- md:version 8.3.0 -->
+<!-- md:feature -->
 
 When enabled, all content tabs across the whole documentation site will be
-linked and switch to the same label when the user clicks on a tab. Add the 
+linked and switch to the same label when the user clicks on a tab. Add the
 following lines to `mkdocs.yml`:
 
 ``` yaml
@@ -76,18 +90,17 @@ tabs with the same label will be activated when a user clicks a content tab
 regardless of order inside a container. Furthermore, this feature is fully
 integrated with [instant loading] and persisted across page loads.
 
-=== ":octicons-check-circle-fill-16: Enabled"
+=== "Feature enabled"
 
-    [![content.tabs.link enabled]][content.tabs.link enabled]
+    [![Linked content tabs enabled]][Linked content tabs enabled]
 
-=== ":octicons-skip-16: Disabled"
+=== "Feature disabled"
 
-    [![content.tabs.link disabled]][content.tabs.link disabled]
+    [![Linked content tabs disabled]][Linked content tabs disabled]
 
-  [link support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.3.0
   [instant loading]: ../setup/setting-up-navigation.md#instant-loading
-  [content.tabs.link enabled]: ../assets/screenshots/content-tabs-link.png
-  [content.tabs.link disabled]: ../assets/screenshots/content-tabs.png
+  [Linked content tabs enabled]: ../assets/screenshots/content-tabs-link.png
+  [Linked content tabs disabled]: ../assets/screenshots/content-tabs.png
 
 ## Usage
 
