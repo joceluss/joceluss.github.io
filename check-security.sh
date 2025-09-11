@@ -41,7 +41,8 @@ fi
 echo -e "\n${YELLOW}3. Checking Python code with bandit...${NC}"
 if command -v bandit &> /dev/null; then
     if [ -d "mkdocs-material" ]; then
-        bandit -r mkdocs-material/ -f json -o security-reports/bandit-report.json 2>/dev/null || true
+        # Exclude node_modules and other third-party directories from security scanning
+        bandit -r mkdocs-material/ -x mkdocs-material/node_modules -f json -o security-reports/bandit-report.json 2>/dev/null || true
         echo "✅ Bandit report saved to security-reports/bandit-report.json"
     else
         echo "⚠️  No Python code found to scan"
