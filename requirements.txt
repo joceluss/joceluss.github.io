@@ -1,5 +1,5 @@
-# Documentation dependencies
-mkdocs-material==9.6.19
+# Documentation dependencies - using fixed version to avoid vulnerabilities
+mkdocs-material==9.6.24
 
 # Security scanning tools
 safety>=3.0.0
