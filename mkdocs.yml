@@ -1,4 +1,11 @@
 site_name: My Docs
+
+# Navigation
+nav:
+  - Home: index.md
+  - BlaBla: blabla.md
+  - Security Guide: security.md
+
 theme:
   name: null
   custom_dir: mkdocs-material/material
