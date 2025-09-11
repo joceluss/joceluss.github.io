@@ -78,7 +78,7 @@ import json
 try:
     with open('security-reports/pip-audit-report.json', 'r') as f:
         data = json.load(f)
-    vulns = [dep for dep in data['dependencies'] if dep['vulns']]
+    vulns = [dep for dep in data['dependencies'] if dep.get('vulns', [])]
     if vulns:
         print(f'❌ Found {len(vulns)} packages with vulnerabilities')
         for pkg in vulns:
