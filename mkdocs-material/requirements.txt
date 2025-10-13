@@ -35,4 +35,4 @@ requests~=2.26
 
 # Temporarily pin click until this is resolved in MkDocs, see
 # https://github.com/mkdocs/mkdocs/issues/4014#issuecomment-3146508306
-click<8.2.2
+click<8.3.1
