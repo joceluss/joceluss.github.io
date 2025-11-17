@@ -1,5 +1,5 @@
 # Documentation dependencies
-mkdocs-material==9.6.24
+mkdocs-material==9.7.0
 
 # Security scanning tools
 safety>=3.0.0
