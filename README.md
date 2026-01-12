@@ -1,43 +1,53 @@
-# Site de Documentation
+# Documentation Joceluss
 
-Ce repository contient le site de documentation personnel hébergé sur GitHub Pages.
+[![Deploy MkDocs](https://github.com/joceluss/joceluss.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/joceluss/joceluss.github.io/actions/workflows/deploy.yml)
 
-## À propos
+Documentation personnelle construite avec [MkDocs](https://www.mkdocs.org/) et [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
-Ce site utilise [MkDocs](https://www.mkdocs.org/) avec le thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) pour créer une documentation moderne et responsive.
+## 🚀 Voir la documentation
 
-## Structure du projet
+👉 [https://joceluss.github.io/](https://joceluss.github.io/)
 
+## 💻 Développement local
+
+### Installation
+
+```bash
+pip install -r requirements.txt
 ```
-├── docs/           # Fichiers markdown de la documentation
-├── mkdocs-material/# Thème Material for MkDocs
-├── mkdocs.yml      # Configuration MkDocs
-└── README.md       # Ce fichier
+
+### Lancer le serveur de développement
+
+```bash
+mkdocs serve
 ```
 
-## Développement local
+Puis ouvrez [http://127.0.0.1:8000](http://127.0.0.1:8000) dans votre navigateur.
 
-Pour travailler sur la documentation en local :
+### Construire le site
 
-1. Installer MkDocs :
-   ```bash
-   pip install mkdocs
-   ```
+```bash
+mkdocs build
+```
 
-2. Lancer le serveur de développement :
-   ```bash
-   mkdocs serve
-   ```
+### Déployer manuellement
 
-3. Ouvrir http://127.0.0.1:8000 dans votre navigateur
+```bash
+mkdocs gh-deploy
+```
 
-## Déploiement
+## 📝 Ajouter du contenu
 
-Le site est automatiquement déployé sur GitHub Pages à l'adresse : https://joceluss.github.io
+1. Créez des fichiers Markdown dans le dossier `docs/`
+2. Ajoutez-les à la navigation dans `mkdocs.yml`
+3. Committez et poussez - le déploiement est automatique !
 
-## Contribuer
+## 🎨 Personnalisation
 
-Pour ajouter ou modifier du contenu :
-1. Éditer les fichiers markdown dans le dossier `docs/`
-2. Tester localement avec `mkdocs serve`
-3. Committer et pousser les modifications
+Modifiez le fichier `mkdocs.yml` pour personnaliser :
+- Les couleurs
+- La navigation
+- Les plugins
+- Et bien plus !
+
+Consultez la [documentation Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) pour toutes les options.

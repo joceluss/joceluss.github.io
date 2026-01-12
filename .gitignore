@@ -1,5 +1,6 @@
-# MkDocs build output
+# MkDocs
 site/
+.cache/
 
 # Python
 __pycache__/
@@ -7,6 +8,9 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -23,17 +27,13 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
-venv/
-env/
-ENV/
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Security scanning reports
-security-reports/
-bandit-report.json
-safety-report.json
-npm-audit-report.json
-
-# Temporary files
-.tmp/
-temp/
+# OS
+.DS_Store
+Thumbs.db
