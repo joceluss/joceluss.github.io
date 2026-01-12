@@ -1,17 +1,34 @@
-# Welcome to MkDocs
+# Bienvenue
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Bienvenue sur ma documentation personnelle construite avec MkDocs Material ! 🚀
 
-## Commands
+## Démarrage rapide
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Cette documentation est créée avec [MkDocs](https://www.mkdocs.org/) et le magnifique thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
-## Project layout
+## Fonctionnalités
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- ✨ Design moderne et responsive
+- 🌓 Mode sombre/clair
+- 🔍 Recherche intégrée
+- 📱 Compatible mobile
+- ⚡ Déploiement automatique sur GitHub Pages
+
+## Prochaines étapes
+
+Commencez à ajouter votre contenu dans le dossier `docs/` et organisez votre navigation dans le fichier `mkdocs.yml`.
+
+### Exemple de code
+
+```python
+def hello_world():
+    print("Hello, MkDocs Material!")
+```
+
+### Admonition
+
+!!! note "Note importante"
+    Ceci est une note avec le thème Material. Vous pouvez utiliser différents types : note, tip, warning, danger, etc.
+
+!!! tip "Astuce"
+    Explorez la [documentation officielle](https://squidfunk.github.io/mkdocs-material/) pour découvrir toutes les fonctionnalités !

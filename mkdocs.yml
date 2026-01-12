@@ -1,28 +1,56 @@
-site_name: My Docs
-
-# Navigation
-nav:
-  - Home: index.md
-  - BlaBla: blabla.md
-  - Security Guide: security.md
+site_name: Joceluss Documentation
+site_url: https://joceluss.github.io/
+site_author: joceluss
+site_description: Documentation personnelle
 
 theme:
-  name: null
-  custom_dir: mkdocs-material/material
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: fr
 
-  # 404 page
-  static_templates:
-    - 404.html
+plugins:
+  - search:
+      lang: fr
 
-  # Necessary for search to work properly
-  include_search_page: false
-  search_index_only: true
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
-  # Default values, taken from mkdocs_theme.yml
-  language: en
-  font:
-    text: Roboto
-    code: Roboto Mono
-  favicon: assets/favicon.png
-  icon:
-    logo: logo
+nav:
+  - Accueil: index.md

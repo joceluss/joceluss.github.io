@@ -1,17 +1,2 @@
-# Documentation dependencies
-mkdocs-material==9.6.24
-
-# Security scanning tools
-safety>=3.0.0
-bandit>=1.7.5
-pip-audit>=2.6.0
-
-# Updated dependencies with security fixes
-# These override the system versions with secure ones
-certifi>=2025.8.3    # PYSEC-2024-230
-cryptography>=45.0.7 # Multiple CVEs (PYSEC-2024-225, GHSA-3ww4-gg4f-jr7f, etc.)
-jinja2>=3.1.6        # Multiple CVEs (GHSA-h5c8-rqwp-cp95, etc.)
-requests>=2.32.5     # GHSA-9wx4-h78v-vm56, GHSA-9hjg-9r4m-mvj7
-urllib3>=2.5.0       # GHSA-34jh-p97f-mpxf, GHSA-pq67-6m6q-mj2v
-idna>=3.10           # PYSEC-2024-60
-setuptools>=75.0.0   # PYSEC-2025-49
+mkdocs>=1.5.0
+mkdocs-material>=9.5.0
