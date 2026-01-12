@@ -1,0 +1,27 @@
+Defaulting to user installation because normal site-packages is not writeable
+Collecting zensical
+  Downloading zensical-0.0.15-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+Collecting click>=8.1.8 (from zensical)
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting deepmerge>=2.0 (from zensical)
+  Downloading deepmerge-2.0-py3-none-any.whl.metadata (3.5 kB)
+Collecting markdown>=3.7 (from zensical)
+  Downloading markdown-3.10-py3-none-any.whl.metadata (5.1 kB)
+Requirement already satisfied: pygments>=2.16 in /usr/lib/python3/dist-packages (from zensical) (2.17.2)
+Collecting pymdown-extensions>=10.15 (from zensical)
+  Downloading pymdown_extensions-10.20-py3-none-any.whl.metadata (3.1 kB)
+Collecting pyyaml>=6.0.2 (from zensical)
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Downloading zensical-0.0.15-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.2/12.2 MB 161.8 MB/s eta 0:00:00
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.3/108.3 kB 37.4 MB/s eta 0:00:00
+Downloading deepmerge-2.0-py3-none-any.whl (13 kB)
+Downloading markdown-3.10-py3-none-any.whl (107 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.7/107.7 kB 39.0 MB/s eta 0:00:00
+Downloading pymdown_extensions-10.20-py3-none-any.whl (268 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 268.7/268.7 kB 75.4 MB/s eta 0:00:00
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 127.0 MB/s eta 0:00:00
+Installing collected packages: pyyaml, markdown, deepmerge, click, pymdown-extensions, zensical
+Successfully installed click-8.3.1 deepmerge-2.0 markdown-3.10 pymdown-extensions-10.20 pyyaml-6.0.3 zensical-0.0.15
