@@ -32,11 +32,7 @@ jobs:
         run: zensical build
       
       - name: Deploy to GitHub Pages
-        run: |
-          git fetch origin gh-pages --depth=1 || true
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf .
-          cp -r site/* .
-          git add .
-          git commit -m "Deploy Zensical site" || true
-          git push origin gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

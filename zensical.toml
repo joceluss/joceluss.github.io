@@ -8,6 +8,16 @@ site_dir = "site"
 [project.theme]
 name = "classic"
 language = "fr"
+features = [
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.top",
+  "search.suggest",
+  "search.highlight",
+  "content.tabs.link",
+  "content.code.annotate",
+  "content.code.copy"
+]
 
 [[project.theme.palette]]
 scheme = "default"
@@ -26,16 +36,6 @@ accent = "indigo"
 [project.theme.palette.toggle]
 icon = "material/brightness-4"
 name = "Passer en mode clair"
-
-[project.theme.features]
-navigation_tabs = true
-navigation_sections = true
-navigation_top = true
-search_suggest = true
-search_highlight = true
-content_tabs_link = true
-content_code_annotation = true
-content_code_copy = true
 
 [project.plugins.search]
 lang = ["fr"]
