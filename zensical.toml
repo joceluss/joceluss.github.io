@@ -3,58 +3,55 @@ site_name = "Joceluss Documentation"
 site_url = "https://joceluss.github.io/"
 site_author = "joceluss"
 site_description = "Documentation personnelle"
-docs_dir = "docs"
 site_dir = "site"
 
 [project.theme]
-name = "material"
+name = "classic"
 language = "fr"
+features = [
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.top",
+  "search.suggest",
+  "search.highlight",
+  "content.tabs.link",
+  "content.code.annotate",
+  "content.code.copy"
+]
 
 [[project.theme.palette]]
-media = "(prefers-color-scheme: light)"
 scheme = "default"
 primary = "indigo"
 accent = "indigo"
 
 [project.theme.palette.toggle]
 icon = "material/brightness-7"
-name = "Switch to dark mode"
+name = "Passer en mode sombre"
 
 [[project.theme.palette]]
-media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 primary = "indigo"
 accent = "indigo"
 
 [project.theme.palette.toggle]
 icon = "material/brightness-4"
-name = "Switch to light mode"
-
-[project.theme.features]
-navigation_tabs = true
-navigation_sections = true
-navigation_top = true
-search_suggest = true
-search_highlight = true
-content_tabs_link = true
-content_code_annotation = true
-content_code_copy = true
+name = "Passer en mode clair"
 
 [project.plugins.search]
-lang = "fr"
+lang = ["fr"]
 
 [project.markdown_extensions]
-pymdownx_highlight = { anchor_linenums = true }
-pymdownx_inlinehilite = true
-pymdownx_snippets = true
-admonition = true
-pymdownx_arithmatex = { generic = true }
-footnotes = true
-pymdownx_details = true
-pymdownx_superfences = true
-pymdownx_mark = true
-attr_list = true
-pymdownx_emoji = { emoji_index = "material.extensions.emoji.twemoji", emoji_generator = "material.extensions.emoji.to_svg" }
+"pymdownx.highlight" = { anchor_linenums = true }
+"pymdownx.inlinehilite" = {}
+"pymdownx.snippets" = {}
+admonition = {}
+"pymdownx.arithmatex" = { generic = true }
+footnotes = {}
+"pymdownx.details" = {}
+"pymdownx.superfences" = {}
+"pymdownx.mark" = {}
+attr_list = {}
+"pymdownx.emoji" = {}
 
 [[project.nav]]
 Accueil = "index.md"

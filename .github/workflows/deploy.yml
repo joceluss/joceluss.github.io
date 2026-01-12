@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: 3.x
       
-      - name: Install dependencies
+      - name: Install Zensical
         run: |
           pip install -r requirements.txt
       
@@ -32,4 +32,7 @@ jobs:
         run: zensical build
       
       - name: Deploy to GitHub Pages
-        run: zensical gh-deploy --force
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
