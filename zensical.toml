@@ -1,0 +1,60 @@
+[project]
+site_name = "Joceluss Documentation"
+site_url = "https://joceluss.github.io/"
+site_author = "joceluss"
+site_description = "Documentation personnelle"
+site_dir = "site"
+
+[project.theme]
+name = "classic"
+language = "fr"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+
+[project.theme.palette.toggle]
+icon = "material/brightness-7"
+name = "Passer en mode sombre"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "indigo"
+accent = "indigo"
+
+[project.theme.palette.toggle]
+icon = "material/brightness-4"
+name = "Passer en mode clair"
+
+[project.theme.features]
+navigation_tabs = true
+navigation_sections = true
+navigation_top = true
+search_suggest = true
+search_highlight = true
+content_tabs_link = true
+content_code_annotation = true
+content_code_copy = true
+
+[project.plugins.search]
+lang = ["fr"]
+
+[project.markdown_extensions]
+pymdownx_highlight = { anchor_linenums = true }
+pymdownx_inlinehilite = {}
+pymdownx_snippets = {}
+admonition = {}
+pymdownx_arithmatex = { generic = true }
+footnotes = {}
+pymdownx_details = {}
+pymdownx_superfences = {}
+pymdownx_mark = {}
+attr_list = {}
+
+[project.markdown_extensions.pymdownx_emoji]
+emoji_index = "!!python/name:material.extensions.emoji.twemoji"
+emoji_generator = "!!python/name:material.extensions.emoji.to_svg"
+
+[[project.nav]]
+Accueil = "index.md"

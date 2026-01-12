@@ -1,4 +1,4 @@
-name: Deploy MkDocs to GitHub Pages
+name: Deploy Zensical to GitHub Pages
 
 on:
   push:
@@ -24,9 +24,19 @@ jobs:
         with:
           python-version: 3.x
       
-      - name: Install dependencies
+      - name: Install Zensical
         run: |
           pip install -r requirements.txt
       
+      - name: Build with Zensical
+        run: zensical build
+      
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+        run: |
+          git fetch origin gh-pages --depth=1 || true
+          git checkout gh-pages || git checkout --orphan gh-pages
+          git rm -rf .
+          cp -r site/* .
+          git add .
+          git commit -m "Deploy Zensical site" || true
+          git push origin gh-pages
