@@ -1,10 +1,10 @@
 # Bienvenue
 
-Bienvenue sur ma documentation personnelle construite avec MkDocs Material ! 🚀
+Bienvenue sur ma documentation personnelle construite avec Zensical ! 🚀
 
-## Démarrage rapide
+## À propos de Zensical
 
-Cette documentation est créée avec [MkDocs](https://www.mkdocs.org/) et le magnifique thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+Cette documentation est créée avec [Zensical](https://zensical.com/), un générateur de sites de documentation moderne et élégant.
 
 ## Fonctionnalités
 
@@ -16,19 +16,19 @@ Cette documentation est créée avec [MkDocs](https://www.mkdocs.org/) et le mag
 
 ## Prochaines étapes
 
-Commencez à ajouter votre contenu dans le dossier `docs/` et organisez votre navigation dans le fichier `mkdocs.yml`.
+Commencez à ajouter votre contenu dans le dossier `docs/` et personnalisez votre site selon vos besoins.
 
 ### Exemple de code
 
 ```python
 def hello_world():
-    print("Hello, MkDocs Material!")
+    print("Hello, Zensical!")
 ```
 
-### Admonition
+### Notes importantes
 
-!!! note "Note importante"
-    Ceci est une note avec le thème Material. Vous pouvez utiliser différents types : note, tip, warning, danger, etc.
+!!! note "Note"
+    Cette documentation est générée automatiquement et déployée avec GitHub Actions.
 
 !!! tip "Astuce"
-    Explorez la [documentation officielle](https://squidfunk.github.io/mkdocs-material/) pour découvrir toutes les fonctionnalités !
+    Explorez les fonctionnalités de Zensical pour créer une documentation claire et professionnelle !
