@@ -4,7 +4,7 @@ Bienvenue sur ma documentation personnelle construite avec Zensical ! 🚀
 
 ## À propos de Zensical
 
-Cette documentation est créée avec [Zensical](https://zensical.com/), un générateur de sites de documentation moderne et élégant.
+Cette documentation est créée avec [Zensical](https://zensical.org/), un générateur de sites de documentation moderne et élégant.
 
 ## Fonctionnalités
 
