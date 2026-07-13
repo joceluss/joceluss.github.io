@@ -6,7 +6,7 @@ site_description = "Documentation personnelle"
 site_dir = "site"
 
 [project.theme]
-# variant = "classic"
+variant = "classic"
 language = "fr"
 features = [
   "navigation.tabs",
