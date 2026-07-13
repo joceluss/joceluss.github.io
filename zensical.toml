@@ -10,6 +10,7 @@ variant = "classic"
 language = "fr"
 features = [
   "navigation.tabs",
+  "navigation.tabs.sticky",
   "navigation.sections",
   "navigation.top",
   "search.suggest",
